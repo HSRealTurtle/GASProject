@@ -70,9 +70,13 @@ public:
 	UFUNCTION()
 	void OnMoveSpeedMultiplierChangedNative(float MoveSpeedMultiplier, int32 StackCount);
 	UFUNCTION()
-	void OnFireDamageChangedNative(float FireDamage, int32 StackCount);
+	void OnFireBallDamageChangedNative(float FireBallDamage, int32 StackCount);
 	UFUNCTION()
-	void OnIceDamageChangedNative(float IceDamage, int32 StackCount);
+	void OnFireRingDamageChangedNative(float FireRingDamage, int32 StackCount);
+	UFUNCTION()
+	void OnIceBallDamageChangedNative(float IceBallDamage, int32 StackCount);
+	UFUNCTION()
+	void OnFrozenHealChangedNative(float FrozenHeal, int32 StackCount);
 
 	//******Event that bind to native events********
 	
@@ -88,13 +92,21 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Abilities")
 	void OnMoveSpeedMultiplierChange(float MoveSpeedMultiplier, int32 StackCount);
 
-	//Event Trigger On FireDamage Change
+	//Event Trigger On FireBallDamage Change
 	UFUNCTION(BlueprintImplementableEvent, Category = "Abilities")
-	void OnFireDamageChange(float FireDamage, int32 StackCount);
+	void OnFireBallDamageChange(float FireBallDamage, int32 StackCount);
 
-	//Event Trigger On IceDamage Change
+	//Event Trigger On FireRingDamage Change
 	UFUNCTION(BlueprintImplementableEvent, Category = "Abilities")
-	void OnIceDamageChange(float IceDamage, int32 StackCount);
+	void OnFireRingDamageChange(float FireRingDamage, int32 StackCount);
+
+	//Event Trigger On IceBallDamage Change
+	UFUNCTION(BlueprintImplementableEvent, Category = "Abilities")
+	void OnIceBallDamageChange(float IceBallDamage, int32 StackCount);
+
+	//Event Trigger On FrozenHeal Change
+	UFUNCTION(BlueprintImplementableEvent, Category = "Abilities")
+	void OnFrozenHealChange(float FrozenHeal, int32 StackCount);
 
 	//*******Ability Values Getter Functions**********
 
@@ -110,12 +122,18 @@ public:
 	//Getter for MoveSpeedMultiplier Value
 	UFUNCTION(BlueprintPure, Category = "Abilities")
 	void GetMoveSpeedMultiplierValue(float& MoveSpeedMultiplier);
-	//Getter for FireDamage Value
+	//Getter for FireBallDamage Value
 	UFUNCTION(BlueprintPure, Category = "Abilities")
-	void GetFireDamageValue(float& FireDamage);
-	//Getter for IceDamage Value
+	void GetFireBallDamageValue(float& FireBallDamage);
+	//Getter for FireRingDamage Value
 	UFUNCTION(BlueprintPure, Category = "Abilities")
-	void GetIceDamageValue(float& IceDamage);
+	void GetFireRingDamageValue(float& FireRingDamage);
+	//Getter for IceBallDamage Value
+	UFUNCTION(BlueprintPure, Category = "Abilities")
+	void GetIceBallDamageValue(float& IceBallDamage);
+	//Getter for FrozenHeal Value
+	UFUNCTION(BlueprintPure, Category = "Abilities")
+	void GetFrozenHealValue(float& FrozenHeal);
 
 	//*******Ability Values Setter Functions**********
 
@@ -128,10 +146,16 @@ public:
 	//Setter for MoveSpeedMultiplier Values
 	UFUNCTION(BlueprintCallable, Category = "Abilities")
 	void SetMoveSpeedMultiplierValue(float NewMoveSpeedMultiplier);
-	//Setter for FireDamage Values
+	//Setter for FireBallDamage Values
 	UFUNCTION(BlueprintCallable, Category = "Abilities")
-	void SetFireDamageValues(float NewFireDamage);
+	void SetFireBallDamageValues(float NewFireBallDamage);
+	//Setter for FireRingDamage Values
+	UFUNCTION(BlueprintCallable, Category = "Abilities")
+	void SetFireRingDamageValues(float NewFireRingDamage);
 	//Setter for IceDamage Values
 	UFUNCTION(BlueprintCallable, Category = "Abilities")
-	void SetIceDamageValues(float NewIceDamage);
+	void SetIceBallDamageValues(float NewIceBallDamage);
+	//Setter for FrozenHeal Values
+	UFUNCTION(BlueprintCallable, Category = "Abilities")
+	void SetFrozenHealValues(float NewFrozenHeal);
 };

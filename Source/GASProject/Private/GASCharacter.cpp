@@ -84,8 +84,10 @@ void AGASCharacter::BeginPlay()
 			const_cast<UGASProjectAttributeSet*>(Attributes)->MAxHealthChangeDelegate.AddDynamic(this, &AGASCharacter::OnMaxHealthChangedNative);
 			const_cast<UGASProjectAttributeSet*>(Attributes)->MoveSpeedChangeDelegate.AddDynamic(this, &AGASCharacter::OnMoveSpeedChangedNative);
 			const_cast<UGASProjectAttributeSet*>(Attributes)->MoveSpeedMultiplierDelegate.AddDynamic(this, &AGASCharacter::OnMoveSpeedMultiplierChangedNative);
-			const_cast<UGASProjectAttributeSet*>(Attributes)->FireDamageDelegate.AddDynamic(this, &AGASCharacter::OnFireDamageChangedNative);
-			const_cast<UGASProjectAttributeSet*>(Attributes)->IceDamageDelegate.AddDynamic(this, &AGASCharacter::OnIceDamageChangedNative);
+			const_cast<UGASProjectAttributeSet*>(Attributes)->FireBallDamageDelegate.AddDynamic(this, &AGASCharacter::OnFireBallDamageChangedNative);
+			const_cast<UGASProjectAttributeSet*>(Attributes)->FireRingDamageDelegate.AddDynamic(this, &AGASCharacter::OnFireRingDamageChangedNative);
+			const_cast<UGASProjectAttributeSet*>(Attributes)->IceBallDamageDelegate.AddDynamic(this, &AGASCharacter::OnIceBallDamageChangedNative);
+			const_cast<UGASProjectAttributeSet*>(Attributes)->FrozenHealDelegate.AddDynamic(this, &AGASCharacter::OnFrozenHealChangedNative);
 
 		}
 	}
@@ -126,14 +128,24 @@ void AGASCharacter::OnMoveSpeedMultiplierChangedNative(float MoveSpeedMultiplier
 	OnMoveSpeedMultiplierChange(MoveSpeedMultiplier, StackCount);
 }
 
-void AGASCharacter::OnFireDamageChangedNative(float FireDamage, int32 StackCount)
+void AGASCharacter::OnFireBallDamageChangedNative(float FireBallDamage, int32 StackCount)
 {
-	OnFireDamageChange(FireDamage, StackCount);
+	OnFireBallDamageChange(FireBallDamage, StackCount);
 }
 
-void AGASCharacter::OnIceDamageChangedNative(float IceDamage, int32 StackCount)
+void AGASCharacter::OnFireRingDamageChangedNative(float FireRingDamage, int32 StackCount)
 {
-	OnIceDamageChange(IceDamage, StackCount);
+	OnFireRingDamageChange(FireRingDamage, StackCount);
+}
+
+void AGASCharacter::OnIceBallDamageChangedNative(float IceBallDamage, int32 StackCount)
+{
+	OnIceBallDamageChange(IceBallDamage, StackCount);
+}
+
+void AGASCharacter::OnFrozenHealChangedNative(float FrozenHeal, int32 StackCount)
+{
+	OnFrozenHealChange(FrozenHeal, StackCount);
 }
 
 //*****Getting*****
@@ -169,19 +181,35 @@ void AGASCharacter::GetMoveSpeedMultiplierValue(float& MoveSpeedMultiplier)
 	}
 }
 
-void AGASCharacter::GetFireDamageValue(float& FireDamage)
+void AGASCharacter::GetFireBallDamageValue(float& FireBallDamage)
 {
 	if (Attributes)
 	{
-		FireDamage = Attributes->GetFireDamage();
+		FireBallDamage = Attributes->GetFireBallDamage();
 	}
 }
 
-void AGASCharacter::GetIceDamageValue(float& IceDamage)
+void AGASCharacter::GetFireRingDamageValue(float& FireRingDamage)
 {
 	if (Attributes)
 	{
-		IceDamage = Attributes->GetIceDamage();
+		FireRingDamage = Attributes->GetFireRingDamage();
+	}
+}
+
+void AGASCharacter::GetIceBallDamageValue(float& IceBallDamage)
+{
+	if (Attributes)
+	{
+		IceBallDamage = Attributes->GetIceBallDamage();
+	}
+}
+
+void AGASCharacter::GetFrozenHealValue(float& FrozenHeal)
+{
+	if (Attributes)
+	{
+		FrozenHeal = Attributes->GetFrozenHeal();
 	}
 }
 
@@ -211,19 +239,35 @@ void AGASCharacter::SetMoveSpeedMultiplierValue(float NewMoveSpeedMultiplier)
 	}
 }
 
-void AGASCharacter::SetFireDamageValues(float NewFireDamage)
+void AGASCharacter::SetFireBallDamageValues(float NewFireBallDamage)
 {
 	if (Attributes)
 	{
-		AbilitySystemComponent->ApplyModToAttribute(Attributes->GetFireDamageAttribute(), EGameplayModOp::Override, NewFireDamage);
+		AbilitySystemComponent->ApplyModToAttribute(Attributes->GetFireBallDamageAttribute(), EGameplayModOp::Override, NewFireBallDamage);
 	}
 }
 
-void AGASCharacter::SetIceDamageValues(float NewIceDamage)
+void AGASCharacter::SetFireRingDamageValues(float NewFireRingDamage)
 {
 	if (Attributes)
 	{
-		AbilitySystemComponent->ApplyModToAttribute(Attributes->GetIceDamageAttribute(), EGameplayModOp::Override, NewIceDamage);
+		AbilitySystemComponent->ApplyModToAttribute(Attributes->GetFireRingDamageAttribute(), EGameplayModOp::Override, NewFireRingDamage);
+	}
+}
+
+void AGASCharacter::SetIceBallDamageValues(float NewIceBallDamage)
+{
+	if (Attributes)
+	{
+		AbilitySystemComponent->ApplyModToAttribute(Attributes->GetIceBallDamageAttribute(), EGameplayModOp::Override, NewIceBallDamage);
+	}
+}
+
+void AGASCharacter::SetFrozenHealValues(float NewFrozenHeal)
+{
+	if (Attributes)
+	{
+		AbilitySystemComponent->ApplyModToAttribute(Attributes->GetFrozenHealAttribute(), EGameplayModOp::Override, NewFrozenHeal);
 	}
 }
 

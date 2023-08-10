@@ -52,23 +52,35 @@ public:
 	FGameplayAttributeData MoveSpeedMultiplier;
 	ATTRIBUTE_ACCESSORS(UGASProjectAttributeSet, MoveSpeedMultiplier)
 
-	//Attribute for FireDamage
+	//Attribute for FireBallDamage
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
-	FGameplayAttributeData FireDamage;
-	ATTRIBUTE_ACCESSORS(UGASProjectAttributeSet, FireDamage)
+	FGameplayAttributeData FireBallDamage;
+	ATTRIBUTE_ACCESSORS(UGASProjectAttributeSet, FireBallDamage)
 
-	//Attribute for IceDamage
+	//Attribute for FireRingDamage
 	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
-	FGameplayAttributeData IceDamage;
-	ATTRIBUTE_ACCESSORS(UGASProjectAttributeSet, IceDamage)
+	FGameplayAttributeData FireRingDamage;
+	ATTRIBUTE_ACCESSORS(UGASProjectAttributeSet, FireRingDamage)
+
+	//Attribute for IceBallDamage
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData IceBallDamage;
+	ATTRIBUTE_ACCESSORS(UGASProjectAttributeSet, IceBallDamage)
+
+	//Attribute for FrozenHeal
+	UPROPERTY(BlueprintReadOnly, Category = "Attributes")
+	FGameplayAttributeData FrozenHeal;
+	ATTRIBUTE_ACCESSORS(UGASProjectAttributeSet, FrozenHeal)
 
 	//*****Delegates for attribute changes*****
 	FAttrChangeDelegate HealthChangeDelegate;
 	FAttrChangeDelegate MAxHealthChangeDelegate;
 	FAttrChangeDelegate MoveSpeedChangeDelegate;
 	FAttrChangeDelegate MoveSpeedMultiplierDelegate;
-	FAttrChangeDelegate FireDamageDelegate;
-	FAttrChangeDelegate IceDamageDelegate;
+	FAttrChangeDelegate FireBallDamageDelegate;
+	FAttrChangeDelegate FireRingDamageDelegate;
+	FAttrChangeDelegate IceBallDamageDelegate;
+	FAttrChangeDelegate FrozenHealDelegate;
 
 	//*****Replication Functions for Attributes*****
 	UFUNCTION()
@@ -80,7 +92,11 @@ public:
 	UFUNCTION()
 		virtual void OnRep_MoveSpeedMultiplier(const FGameplayAttributeData& OldMoveSpeedMultiplier);
 	UFUNCTION()
-		virtual void OnRep_FireDamage(const FGameplayAttributeData& OldFireDamage);
+		virtual void OnRep_FireBallDamage(const FGameplayAttributeData& OldFireBallDamage);
 	UFUNCTION()
-		virtual void OnRep_IceDamage(const FGameplayAttributeData& OldIceDamage);
+		virtual void OnRep_FireRingDamage(const FGameplayAttributeData& OldOnRep_FireRingDamage);
+	UFUNCTION()
+		virtual void OnRep_IceBallDamage(const FGameplayAttributeData& OldIceBallDamage);
+	UFUNCTION()
+		virtual void OnRep_FrozenHeal(const FGameplayAttributeData& OldFrozenHeal);
 };

@@ -30,15 +30,25 @@ void UGASProjectAttributeSet::PostGameplayEffectExecute(const struct FGameplayEf
 		SetMoveSpeedMultiplier(FMath::Clamp(GetMoveSpeedMultiplier(), 0.1f, 2.0f));
 		MoveSpeedMultiplierDelegate.Broadcast(GetMoveSpeedMultiplier(), Data.EffectSpec.StackCount);
 	}
-	if (Data.EvaluatedData.Attribute == GetFireDamageAttribute())
+	if (Data.EvaluatedData.Attribute == GetFireBallDamageAttribute())
 	{
-		SetFireDamage(FMath::Clamp(GetFireDamage(), 0.0f, 1000.0f));
-		FireDamageDelegate.Broadcast(GetFireDamage(), Data.EffectSpec.StackCount);
+		SetFireBallDamage(FMath::Clamp(GetFireBallDamage(), 0.0f, 1000.0f));
+		FireBallDamageDelegate.Broadcast(GetFireBallDamage(), Data.EffectSpec.StackCount);
 	}
-	if (Data.EvaluatedData.Attribute == GetIceDamageAttribute())
+	if (Data.EvaluatedData.Attribute == GetFireRingDamageAttribute())
 	{
-		SetIceDamage(FMath::Clamp(GetIceDamage(), 0.0f, 1000.0f));
-		FireDamageDelegate.Broadcast(GetIceDamage(), Data.EffectSpec.StackCount);
+		SetFireRingDamage(FMath::Clamp(GetFireRingDamage(), 0.0f, 1000.0f));
+		FireRingDamageDelegate.Broadcast(GetFireRingDamage(), Data.EffectSpec.StackCount);
+	}
+	if (Data.EvaluatedData.Attribute == GetIceBallDamageAttribute())
+	{
+		SetIceBallDamage(FMath::Clamp(GetIceBallDamage(), 0.0f, 1000.0f));
+		IceBallDamageDelegate.Broadcast(GetIceBallDamage(), Data.EffectSpec.StackCount);
+	}
+	if (Data.EvaluatedData.Attribute == GetFrozenHealAttribute())
+	{
+		SetFrozenHeal(FMath::Clamp(GetFrozenHeal(), 0.0f, 1000.0f));
+		FrozenHealDelegate.Broadcast(GetFrozenHeal(), Data.EffectSpec.StackCount);
 	}
 }
 
@@ -48,8 +58,10 @@ void UGASProjectAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimePropert
 	DOREPLIFETIME_CONDITION_NOTIFY(UGASProjectAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UGASProjectAttributeSet, MoveSpeed, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UGASProjectAttributeSet, MoveSpeedMultiplier, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UGASProjectAttributeSet, FireDamage, COND_None, REPNOTIFY_Always);
-	DOREPLIFETIME_CONDITION_NOTIFY(UGASProjectAttributeSet, IceDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UGASProjectAttributeSet, FireBallDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UGASProjectAttributeSet, FireRingDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UGASProjectAttributeSet, IceBallDamage, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UGASProjectAttributeSet, FrozenHeal, COND_None, REPNOTIFY_Always);
 }
 
 void UGASProjectAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth)
@@ -68,11 +80,19 @@ void UGASProjectAttributeSet::OnRep_MoveSpeedMultiplier(const FGameplayAttribute
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UGASProjectAttributeSet, MoveSpeedMultiplier, OldMoveSpeedMultiplier);
 }
-void UGASProjectAttributeSet::OnRep_FireDamage(const FGameplayAttributeData& OldFireDamage)
+void UGASProjectAttributeSet::OnRep_FireBallDamage(const FGameplayAttributeData& OldFireBallDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UGASProjectAttributeSet, FireDamage, OldFireDamage);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UGASProjectAttributeSet, FireBallDamage, OldFireBallDamage);
 }
-void UGASProjectAttributeSet::OnRep_IceDamage(const FGameplayAttributeData& OldIceDamage)
+void UGASProjectAttributeSet::OnRep_FireRingDamage(const FGameplayAttributeData& OldFireRingDamage)
 {
-	GAMEPLAYATTRIBUTE_REPNOTIFY(UGASProjectAttributeSet, IceDamage, OldIceDamage);
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UGASProjectAttributeSet, FireRingDamage, OldFireRingDamage);
+}
+void UGASProjectAttributeSet::OnRep_IceBallDamage(const FGameplayAttributeData& OldIceBallDamage)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UGASProjectAttributeSet, IceBallDamage, OldIceBallDamage);
+}
+void UGASProjectAttributeSet::OnRep_FrozenHeal(const FGameplayAttributeData& OldFrozenHeal)
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UGASProjectAttributeSet, FrozenHeal, OldFrozenHeal);
 }
